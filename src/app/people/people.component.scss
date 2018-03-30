@@ -1,0 +1,33 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatar {
+  $size: 10vmin;
+  width: $size;
+  height: $size;
+  margin: 1vmin;
+  border-radius: $size;
+  overflow: hidden;
+  transition: all 0.15s ease-in-out;
+  will-change: transform;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: scale-down;
+  }
+  &:hover {
+    transform: scale(1.25);
+  }
+}
