@@ -17,17 +17,22 @@
   $size: 10vmin;
   width: $size;
   height: $size;
-  margin: 1vmin;
+  margin: 1.5vmin;
   border-radius: $size;
   overflow: hidden;
   transition: all 0.15s ease-in-out;
   will-change: transform;
+  opacity: 0.8;
   img {
     width: 100%;
     height: auto;
     object-fit: scale-down;
   }
-  &:hover {
-    transform: scale(1.25);
+  &:hover,
+  &.active {
+    transform: scale(1.2);
+  }
+  &.active {
+    opacity: 1;
   }
 }

@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 
 <div class="avatars">
-  <a href="#" class="avatar" *ngFor="let person of people">
+  <a routerLink="/{{person.id}}" routerLinkActive="active" class="avatar" *ngFor="let person of people">
     <img src="https://api.adorable.io/avatars/285/{{person.email}}" alt="">
   </a>
 </div>
