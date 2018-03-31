@@ -25,7 +25,7 @@ import { animate, query, style, trigger, transition, group } from '@angular/anim
     ])
   ]
 })
-export class PeopleComponent implements OnInit {
+export class PeopleComponent {
   people: People[] = [];
   private personId: string;
 
@@ -34,18 +34,14 @@ export class PeopleComponent implements OnInit {
     this.people = this.route.snapshot.data.people;
   }
 
-  ngOnInit() {
-  }
-
   @HostListener('document:keydown', ['$event'])
   handleKeyboard(event: KeyboardEvent) {
     const offset = {ArrowLeft: -1, ArrowRight: 1}[event.code];
     if (offset) {
       const nextPage = +this.personId + offset;
-      if (nextPage === this.people.length || nextPage === 0) {
-        return;
+      if (nextPage < this.people.length && nextPage > 0) {
+        this.router.navigate([nextPage]);
       }
-      this.router.navigate([nextPage]);
     }
   }
 
@@ -53,14 +49,12 @@ export class PeopleComponent implements OnInit {
   getState(outletRef: RouterOutlet) {
     const newPersonId = outletRef.activatedRoute.snapshot.params.id;
     const offsetEnter = newPersonId > this.personId ? 100 : -100;
-    const offsetLeave = -offsetEnter;
     this.personId = newPersonId;
-    // console.log(newPersonId);
     return {
       value: newPersonId.toString(),
       params: {
         offsetEnter,
-        offsetLeave
+        offsetLeave: -offsetEnter
       }
     };
   }

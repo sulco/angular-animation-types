@@ -28,7 +28,6 @@
   overflow: hidden;
   transition: all 0.15s ease-in-out;
   will-change: transform;
-  opacity: 0.8;
   border: solid 2px transparent;
   img {
     width: 100%;
@@ -40,7 +39,6 @@
     transform: scale(1.1);
   }
   &.active {
-    opacity: 1;
     transition-delay: 200ms;
     transform: scale(1.1);
     border: solid 2px rgba(#fff, 0.7);
