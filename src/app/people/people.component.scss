@@ -1,12 +1,16 @@
 :host {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  top: 20px;
+  height: 700px;
+  width: 420px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border: solid 10px rgba(#fff, 0.15);
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px rgba(#000, 0.4);
 }
 
 .avatars {
@@ -14,15 +18,16 @@
 }
 
 .avatar {
-  $size: 10vmin;
+  $size: 40px;
   width: $size;
   height: $size;
-  margin: 1.5vmin;
+  margin: $size / 8;
   border-radius: $size;
   overflow: hidden;
   transition: all 0.15s ease-in-out;
   will-change: transform;
   opacity: 0.8;
+  border: solid 2px transparent;
   img {
     width: 100%;
     height: auto;
@@ -34,6 +39,7 @@
   }
   &.active {
     opacity: 1;
+    border: solid 2px rgba(#fff, 0.5);
   }
 }
 
