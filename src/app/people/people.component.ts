@@ -50,6 +50,9 @@ export class PeopleComponent implements OnInit {
     const offset = {ArrowLeft: -1, ArrowRight: 1}[event.code];
     if (offset) {
       const nextPage = +this.personId + offset;
+      if (nextPage === this.people.length || nextPage === 0) {
+        return;
+      }
       this.router.navigate([nextPage]);
     }
   }

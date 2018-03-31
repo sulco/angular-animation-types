@@ -10,6 +10,19 @@
   color: white;
 }
 
-h1 {
+header {
+  text-align: center;
   color: rgba(#fff, 0.8);
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-weight: 100;
+  margin-top: 0;
+  font-style: italic;
 }
