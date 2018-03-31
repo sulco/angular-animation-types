@@ -10,26 +10,18 @@ import { animate, query, style, trigger, transition, group } from '@angular/anim
   animations: [
     trigger('routerTransition', [
       transition('* <=> *', [
-        // query(':enter', style({transform: 'translateX(-50%)'}), {optional: true}),
-        // query(':enter, :leave', style({position: 'fixed', width: '100%'}), {optional: true}),
-        // style({transform: 'translateX({{initialOffset}}%)'}),
-        // animate('0.3s ease-in-out', style({transform: 'translateX(0%)'}))
-
+        // cubic-bezier(0.68, -0.55, 0.265, 1.55)
         group([
           query(':enter', [
             style({transform: 'translateX({{offsetEnter}}%)'}),
-            animate('0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)', style({transform: 'translateX(0%)'}))
+            animate('0.4s ease-in-out', style({transform: 'translateX(0%)'}))
           ], {optional: true}),
           query(':leave', [
             style({transform: 'translateX(0%)'}),
-            animate('0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)', style({transform: 'translateX({{offsetLeave}}%)'}))
+            animate('0.4s ease-in-out', style({transform: 'translateX({{offsetLeave}}%)'}))
           ], {optional: true}),
         ])
       ]),
-      // transition('void => *', [
-      //   style({transform: 'translateX(0%)'}),
-      //   animate('0.5s ease-in-out', style({transform: 'translateX(-100%)'}))
-      // ])
     ])
   ]
 })
