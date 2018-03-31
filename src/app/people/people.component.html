@@ -1,4 +1,6 @@
-<router-outlet></router-outlet>
+<main [@routerTransition]="getState(outletRef)">
+  <router-outlet #outletRef="outlet"></router-outlet>
+</main>
 
 <div class="avatars">
   <a routerLink="/{{person.id}}" routerLinkActive="active" class="avatar" *ngFor="let person of people">
