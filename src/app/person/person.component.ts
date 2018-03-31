@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { People, Person } from '../models/people.models';
 import { ActivatedRoute } from '@angular/router';
+import Vibrant = require('node-vibrant');
 
 @Component({
   selector: 'ts-person',
@@ -19,11 +20,18 @@ export class PersonComponent implements OnInit {
   }
 
   ngOnInit() {
+    Vibrant.from('/assets/Karley_Dach@jasper.info.png').getPalette((err, palette) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(palette);
+      }
+    });
   }
 
   @HostBinding('style.background')
   get background() {
-    return `hsl(${this.hashCode(this.person.email)}, 80%, 10%)`;
+    return `hsl(${this.hashCode(this.person.email)}, 80%, 20%)`;
   }
 
   private hashCode(str: string) {

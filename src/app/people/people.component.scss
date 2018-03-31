@@ -35,11 +35,13 @@
   }
   &:hover,
   &.active {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   &.active {
     opacity: 1;
-    border: solid 2px rgba(#fff, 0.5);
+    transition-delay: 200ms;
+    transform: scale(1.1);
+    border: solid 2px rgba(#fff, 0.7);
   }
 }
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { People } from '../models/people.models';
 import { animate, query, style, trigger, transition, group } from '@angular/animations';
 
@@ -37,13 +37,23 @@ export class PeopleComponent implements OnInit {
   people: People[] = [];
   private personId: string;
 
-  constructor(private route: ActivatedRoute) {
-    console.log('NEW!');
+  constructor(private route: ActivatedRoute,
+              private router: Router) {
     this.people = this.route.snapshot.data.people;
   }
 
   ngOnInit() {
   }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboard(event: KeyboardEvent) {
+    const offset = {ArrowLeft: -1, ArrowRight: 1}[event.code];
+    if (offset) {
+      const nextPage = +this.personId + offset;
+      this.router.navigate([nextPage]);
+    }
+  }
+
 
   getState(outletRef: RouterOutlet) {
     const newPersonId = outletRef.activatedRoute.snapshot.params.id;
