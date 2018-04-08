@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { People } from '../models/people.models';
 import { animate, query, style, trigger, transition, group } from '@angular/animations';
@@ -27,16 +27,17 @@ import { take } from 'rxjs/operators';
     ])
   ]
 })
-export class PeopleComponent {
+export class PeopleComponent implements AfterViewInit {
   people: People[] = [];
   private personId: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router) {
     this.people = this.route.snapshot.data.people;
-    setTimeout(() => {
-      this.showAvatars();
-    }, 100);
+  }
+
+  ngAfterViewInit() {
+    this.showAvatars();
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -70,15 +71,15 @@ export class PeopleComponent {
   showAvatars() {
     const keyframes = (index: number): AnimationKeyFrame[] => {
       return [
-        {transform: `translate(${(index - 1) * 50}px, 120px)`},
-        {transform: `translate(${(index - 1) * 50}px, 0px)`}
+        {transform: `translate(180px, 0)`},
+        {transform: `translate(${(index - 1) * 50}px, -120px)`}
       ];
     };
 
     const options: AnimationEffectTiming = {
       duration: 1000,
-      easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-      // easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      // easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+      easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       // easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
       fill: 'forwards'
     };
