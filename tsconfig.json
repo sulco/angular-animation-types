@@ -11,6 +11,9 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types": [
+      "@types/web-animations-js"
+    ],
     "lib": [
       "es2017",
       "dom"

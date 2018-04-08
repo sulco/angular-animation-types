@@ -1,10 +1,11 @@
 :host {
+  display: flex;
+  flex-direction: column;
   position: relative;
   top: 20px;
   height: 500px;
   width: 420px;
   margin: 0 auto;
-  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -14,25 +15,38 @@
 }
 
 .avatars {
-  margin-top: 250px;
-  display: flex;
+  margin-top: auto;
+  height: 120px;
+  //display: flex;
   z-index: 2;
+  position: relative;
+  left: 0;
+  width: 100%;
+  //background: rgba(yellow, 0.3);
 }
 
 .avatar {
   $size: 40px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
   width: $size;
   height: $size;
   margin: $size / 8;
-  border-radius: $size;
-  overflow: hidden;
+  //border-radius: $size;
+  //overflow: hidden;
   transition: all 0.15s ease-in-out;
   will-change: transform;
-  border: solid 2px transparent;
+  a {
+    display: block;
+  }
   img {
     width: 100%;
     height: auto;
-    object-fit: scale-down;
+    border-radius: $size;
+    border: solid 2px transparent;
+    //object-fit: scale-down;
   }
   &:hover,
   &.active {
@@ -41,7 +55,9 @@
   &.active {
     transition-delay: 200ms;
     transform: scale(1.1);
-    border: solid 2px rgba(#fff, 0.7);
+    img {
+      border: solid 2px rgba(#fff, 0.7);
+    }
   }
 }
 
