@@ -3,6 +3,7 @@ import { Routes, RouterModule, RouteReuseStrategy, DetachedRouteHandle, Activate
 import { PeopleComponent } from './people/people.component';
 import { PeopleResolver } from './resolvers/people.resolver';
 import { PersonComponent } from './person/person.component';
+import { CustomReuseStrategy } from './route-reuse-strategy';
 
 const routes: Routes = [
   {
@@ -19,36 +20,6 @@ const routes: Routes = [
     ]
   }
 ];
-
-class CustomReuseStrategy implements RouteReuseStrategy {
-
-  handlers: {[key: string]: DetachedRouteHandle} = {};
-
-  shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return false;
-  }
-
-  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-    this.handlers[route.routeConfig.path] = null;
-  }
-
-  shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    // return !!route.routeConfig && !!this.handlers[route.routeConfig.path];
-    return false;
-  }
-
-  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    if (!route.routeConfig) return null;
-    return this.handlers[route.routeConfig.path];
-  }
-
-  shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    // return future.routeConfig === curr.routeConfig;
-    return curr.component !== PersonComponent;
-    // return true;
-  }
-}
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
