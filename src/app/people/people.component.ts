@@ -52,6 +52,9 @@ export class PeopleComponent {
 
 
   getState(outletRef: RouterOutlet) {
+    if (!outletRef.isActivated) {
+      return;
+    }
     const newPersonId = outletRef.activatedRoute.snapshot.params.id;
     const offsetEnter = +newPersonId > +this.personId ? 100 : -100;
     this.personId = newPersonId;
