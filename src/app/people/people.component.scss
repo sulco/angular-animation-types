@@ -30,7 +30,7 @@
   display: inline-block;
   position: absolute;
   //left: 180px;
-  top: 120px;
+  top: 125px;
   width: $size;
   height: $size;
   margin: $size / 8;
@@ -48,9 +48,12 @@
     border: solid 2px transparent;
     //object-fit: scale-down;
   }
-  &:hover,
-  &.active {
-    transform: scale(1.1);
+  > div {
+    transition: all 0.15s ease-in-out;
+  }
+  > div:hover,
+  > div.zoomed {
+    transform: scale(1.3);
   }
   &.active {
     transition-delay: 200ms;

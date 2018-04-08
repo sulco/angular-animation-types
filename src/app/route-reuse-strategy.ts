@@ -14,8 +14,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
   }
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    // return !!route.routeConfig && !!this.handlers[route.routeConfig.path];
-    return false;
+    return !!route.routeConfig && !!this.handlers[route.routeConfig.path];
   }
 
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
