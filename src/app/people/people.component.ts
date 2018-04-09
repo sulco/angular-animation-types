@@ -70,27 +70,32 @@ export class PeopleComponent implements AfterViewInit {
   }
 
   showAvatars() {
+    const avatarSpace = 100;
+
+    const random = (min: number, max: number) => Math.random() * (max - min) + min;
+
     const keyframes = (index: number): AnimationKeyFrame[] => {
       return [
-        {transform: `translate(180px, 0)`},
-        {transform: `translate(${(index - 1) * 50}px, -120px)`}
+        {transform: `translate(${random(10, 350)}px, ${random(-10, -550)}px) scale(0)`},
+        {transform: `translate(${(index - 1) * avatarSpace}px, -120px) scale(1)`}
       ];
     };
 
-    const options: AnimationEffectTiming = {
-      duration: 1000,
-      easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+    const options = (): AnimationEffectTiming => ({
+      duration: random(1000, 4000),
+      easing: 'ease-in-out',
+      // easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       fill: 'forwards'
-    };
+    });
 
-    timer(0, 150)
+    timer(0, 250)
       .pipe(
         take(this.people.length / 2)
       )
       .subscribe(step => {
         [step + 1, this.people.length - step].forEach(index => {
           document.getElementById(`person_${index}`)
-            .animate(keyframes(index), options);
+            .animate(keyframes(index), options());
         });
       });
   }

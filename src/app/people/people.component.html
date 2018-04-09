@@ -2,7 +2,7 @@
   <router-outlet #outletRef="outlet"></router-outlet>
 </main>
 
-<div class="avatars" [style.transform]="'translateX('+ (225 - currentPersonId * 50) +'px)'">
+<div class="avatars" [style.transform]="'translateX('+ (245 - currentPersonId * 100) +'px)'">
   <div *ngFor="let person of people" routerLinkActive="active"
        class="avatar" id="person_{{person.id}}">
     <div class="zoom-wrapper" routerLinkActive="zoomed">
