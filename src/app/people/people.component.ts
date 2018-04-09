@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { People } from '../models/people.models';
 import { animate, query, style, trigger, transition, group } from '@angular/animations';
@@ -29,9 +29,10 @@ import { take } from 'rxjs/operators';
 })
 export class PeopleComponent implements AfterViewInit {
   people: People[] = [];
-  private personId: string;
+  currentPersonId: string;
 
   constructor(private route: ActivatedRoute,
+              private zone: NgZone,
               private router: Router) {
     this.people = this.route.snapshot.data.people;
   }
@@ -44,7 +45,7 @@ export class PeopleComponent implements AfterViewInit {
   handleKeyboard(event: KeyboardEvent) {
     const offset = {ArrowLeft: -1, ArrowRight: 1}[event.code];
     if (offset) {
-      const nextPage = +this.personId + offset;
+      const nextPage = +this.currentPersonId + offset;
       if (nextPage < this.people.length + 1 && nextPage > 0) {
         this.router.navigate([nextPage]);
       }
@@ -57,8 +58,8 @@ export class PeopleComponent implements AfterViewInit {
       return;
     }
     const newPersonId = outletRef.activatedRoute.snapshot.params.id;
-    const offsetEnter = +newPersonId > +this.personId ? 100 : -100;
-    this.personId = newPersonId;
+    const offsetEnter = +newPersonId > +this.currentPersonId ? 100 : -100;
+    this.currentPersonId = newPersonId;
     return {
       value: newPersonId.toString(),
       params: {
@@ -78,9 +79,7 @@ export class PeopleComponent implements AfterViewInit {
 
     const options: AnimationEffectTiming = {
       duration: 1000,
-      // easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-      // easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
       fill: 'forwards'
     };
 

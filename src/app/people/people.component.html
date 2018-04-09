@@ -2,10 +2,10 @@
   <router-outlet #outletRef="outlet"></router-outlet>
 </main>
 
-<div class="avatars">
+<div class="avatars" [style.transform]="'translateX('+ (225 - currentPersonId * 50) +'px)'">
   <div *ngFor="let person of people" routerLinkActive="active"
        class="avatar" id="person_{{person.id}}">
-    <div routerLinkActive="zoomed">
+    <div class="zoom-wrapper" routerLinkActive="zoomed">
       <a routerLink="/{{person.id}}" routerLinkActive="jello"
          class="animated">
         <img src="https://api.adorable.io/avatars/285/{{person.email}}" alt="">

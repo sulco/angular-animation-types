@@ -22,20 +22,17 @@
   position: relative;
   left: 0;
   width: 100%;
-  //background: rgba(yellow, 0.3);
+  transition: all 0.55s ease-in-out;
 }
 
 .avatar {
   $size: 40px;
   display: inline-block;
   position: absolute;
-  //left: 180px;
   top: 125px;
   width: $size;
   height: $size;
   margin: $size / 8;
-  //border-radius: $size;
-  //overflow: hidden;
   transition: all 0.15s ease-in-out;
   will-change: transform;
   a {
@@ -46,14 +43,13 @@
     height: auto;
     border-radius: $size;
     border: solid 2px transparent;
-    //object-fit: scale-down;
   }
-  > div {
+  .zoom-wrapper {
     transition: all 0.15s ease-in-out;
-  }
-  > div:hover,
-  > div.zoomed {
-    transform: scale(1.3);
+    &:hover,
+    &.zoomed {
+      transform: scale(1.25);
+    }
   }
   &.active {
     transition-delay: 200ms;
