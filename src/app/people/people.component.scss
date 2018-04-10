@@ -43,6 +43,7 @@
     height: auto;
     border-radius: $size;
     border: solid 2px transparent;
+    transition: all 0.2s;
   }
   .zoom-wrapper {
     transition: all 0.15s ease-in-out;
@@ -55,7 +56,8 @@
     transition-delay: 200ms;
     transform: scale(1.1);
     img {
-      border: solid 2px rgba(#fff, 0.7);
+      border: solid 2px rgba(#fff, 1);
+      box-shadow: 5px 5px 1px rgba(0,0,0,0.3);
     }
   }
 }
