@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, HostListener, NgZone, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, HostListener, NgZone } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { People } from '../models/people.models';
-import { animate, query, style, trigger, transition, group } from '@angular/animations';
+import { animate, group, query, style, transition, trigger } from '@angular/animations';
 import { timer } from 'rxjs/observable/timer';
 import { take } from 'rxjs/operators';
 
@@ -12,15 +12,14 @@ import { take } from 'rxjs/operators';
   animations: [
     trigger('routerTransition', [
       transition('* <=> *', [
-        // cubic-bezier(0.68, -0.55, 0.265, 1.55)
         group([
           query(':enter', [
-            style({transform: 'translateX({{offsetEnter}}%)'}),
+            style({transform: 'translateX(100%)'}),
             animate('0.4s ease-in-out', style({transform: 'translateX(0%)'}))
           ], {optional: true}),
           query(':leave', [
             style({transform: 'translateX(0%)'}),
-            animate('0.4s ease-in-out', style({transform: 'translateX({{offsetLeave}}%)'}))
+            animate('0.4s ease-in-out', style({transform: 'translateX(-100%)'}))
           ], {optional: true}),
         ])
       ]),
@@ -69,6 +68,10 @@ export class PeopleComponent implements AfterViewInit {
     };
   }
 
+  getAvatarsTransform(): string {
+    return `translateX(${245 - parseInt(this.currentPersonId, 10) * 100}px)`;
+  }
+
   showAvatars() {
     const avatarSpace = 100;
 
@@ -82,9 +85,8 @@ export class PeopleComponent implements AfterViewInit {
     };
 
     const options = (): AnimationEffectTiming => ({
-      duration: random(1000, 4000),
+      duration: random(500, 2000),
       easing: 'ease-in-out',
-      // easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       fill: 'forwards'
     });
 
