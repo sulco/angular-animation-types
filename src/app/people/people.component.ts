@@ -74,31 +74,33 @@ export class PeopleComponent implements AfterViewInit {
 
   showAvatars() {
     const avatarSpace = 100;
-
     const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
+    /* Every avatar will move on it's own: */
     const keyframes = (index: number): AnimationKeyFrame[] => {
       return [
+        /* It starts in a random position: */
         {transform: `translate(${random(10, 350)}px, ${random(-10, -550)}px) scale(0)`},
+        /* ...and ends up in a carefully calculated place: */
         {transform: `translate(${(index - 1) * avatarSpace}px, -120px) scale(1)`}
       ];
     };
 
+    /* Every avatar will move with it's own speed */
     const options = (): AnimationEffectTiming => ({
       duration: random(500, 2000),
       easing: 'ease-in-out',
       fill: 'forwards'
     });
 
-    timer(0, 250)
+    /* Ok, not let's start moving! */
+    timer(0, 125)                                        // Staggering animation
       .pipe(
-        take(this.people.length / 2)
+        take(this.people.length)
       )
-      .subscribe(step => {
-        [step + 1, this.people.length - step].forEach(index => {
-          document.getElementById(`person_${index}`)
-            .animate(keyframes(index), options());
-        });
+      .subscribe(index => {
+        document.getElementById(`person_${index + 1}`)   // Web Animations API
+          .animate(keyframes(index + 1), options());     // - not that complex, right?
       });
   }
 }
